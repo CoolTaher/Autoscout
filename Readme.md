@@ -138,7 +138,7 @@ Show Results
 ## How to install and run
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/CoolTaher/Autoscout
 cd autoscout
 
 pip install -r requirements.txt
@@ -193,8 +193,8 @@ Not every listing gets a badge — only ones where the data genuinely stands out
 
 ## Credits / team
 
-Built for the **Into the Scrape-Verse** hackathon by WeMakeDevs.
+Built for the  **[Into the Scrape-Verse](https://www.wemakedevs.org/hackathons/scrape-verse)** hackathon by WeMakeDevs.
 
-Hero image via [Unsplash](https://unsplash.com/)
+Hero image via **[Unsplash](https://unsplash.com/)**
 
 <!-- Add team member names / roles here -->
