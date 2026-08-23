@@ -42,7 +42,7 @@ load_dotenv()
 BRIGHTDATA_TOKEN = os.getenv("BRIGHTDATA_API_TOKEN")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-COLLECTOR_ID = "c_mt08rawd1kysv6q7l5"
+COLLECTOR_ID = "" #get your collector_id by running first job by Bright Data IDE
 TRIGGER_URL = "https://api.brightdata.com/dca/trigger"
 DATASET_URL = "https://api.brightdata.com/dca/dataset"
 
