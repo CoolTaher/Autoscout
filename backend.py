@@ -63,7 +63,7 @@ FALLBACK_CITIES = [
 # While True: get_car_listings() skips triggering a new scrape and
 # reuses TEST_COLLECTION_ID instead. Set to False for real, live scrapes.
 TEST_MODE = False
-TEST_COLLECTION_ID = "j_mt4av3xn1atd5aq0pc"
+TEST_COLLECTION_ID = "" # Get any recent job ID for Test Mode
 
 # --- Debug switch ---
 # While True: status strings carry extra diagnostic detail.
