@@ -1,0 +1,913 @@
+/* ==========================================================
+   FULL SCREEN APP
+========================================================== */
+
+html,
+body,
+[data-testid="stAppViewContainer"],
+[data-testid="stApp"] {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+    background: #000 !important;
+}
+
+[data-testid="stAppViewContainer"] > .main {
+    height: 100vh !important;
+    overflow: hidden !important;
+}
+
+.main .block-container {
+    max-width: none !important;
+    height: 100vh !important;
+    padding: 0 60px !important;
+    overflow: hidden !important;
+}
+
+/* ==========================================================
+   STREAMLIT TOP BAR — MATCH BACKGROUND
+========================================================== */
+
+[data-testid="stHeader"],
+[data-testid="stToolbar"] {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+[data-testid="stHeader"] {
+    color: white !important;
+}
+/* ==========================================================
+   FIXED CAR BACKGROUND
+========================================================== */
+
+.car-background {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-size: cover;
+    background-position: center 85%;
+    background-repeat: no-repeat;
+
+    z-index: 0;
+    pointer-events: none;
+}
+/* ==========================================================
+   BACKGROUND GRADIENT
+========================================================== */
+
+[data-testid="stAppViewContainer"]::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.00) 0%,
+        rgba(0, 0, 0, 0.03) 30%,
+        rgba(0, 0, 0, 0.12) 55%,
+        rgba(0, 0, 0, 0.28) 78%,
+        rgba(0, 0, 0, 0.55) 100%
+    );
+}
+
+/* =========================================================
+   ALL UI ABOVE BACKGROUND
+========================================================== */
+
+.main .block-container > div {
+    position: relative;
+    z-index: 10;
+}
+
+/* ==========================================================
+   AUTOSCOUT BRAND
+========================================================== */
+
+.autoscout-brand {
+    margin-top: 45px;
+}
+
+.autoscout-tagline {
+    margin-top: 10px;
+
+    color: rgba(255, 255, 255, 0.88);
+
+    font-size: 15px;
+    font-weight: 600;
+
+    letter-spacing: 0.4px;
+    line-height: 1.4;
+
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.55);
+}
+
+/* ==========================================================
+   SEARCH AREA
+========================================================== */
+
+div[data-testid="stCaptionContainer"] {
+    color: rgba(255,255,255,0.70) !important;
+    margin-top: 90px !important;
+}
+
+div[data-testid="stTextInput"] input {
+    height: 60px !important;
+    padding: 0 16px !important;
+    border-radius: 14px !important;
+    background: rgba(10, 10, 10, 0.78) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: #ffffff !important;
+    font-size: 15px !important;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+div[data-testid="stTextInput"] input::placeholder {
+    color: rgba(255,255,255,0.42) !important;
+}
+
+/* ==========================================================
+   RESULT AREA
+========================================================== */
+
+.results-panel {
+    position: fixed;
+
+    left: 60px;
+    right: 60px;
+    bottom: 25px;
+    top: 330px;
+
+    z-index: 20;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding-right: 12px;
+}
+
+/* ==========================================================
+   PREMIUM METRICS
+========================================================== */
+
+.av-metrics {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.av-metric-card {
+    position: relative;
+
+    flex: 1;
+
+    min-width: 0;
+    height: 108px;
+
+    padding: 18px 22px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(35, 35, 35, 0.88),
+            rgba(12, 12, 12, 0.78)
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* subtle light sweep */
+
+.av-metric-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 1px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.35),
+        transparent
+    );
+}
+
+/* subtle green ambient glow */
+
+.av-metric-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 90px;
+    height: 90px;
+
+    right: -35px;
+    bottom: -45px;
+
+    background: rgba(34, 197, 94, 0.10);
+
+    border-radius: 50%;
+
+    filter: blur(20px);
+
+    pointer-events: none;
+}
+
+
+.av-metric-card:hover {
+    transform: translateY(-2px);
+
+    border-color: rgba(34, 197, 94, 0.38);
+
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.35),
+        0 0 22px rgba(34, 197, 94, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10);
+}
+
+/* ==========================================================
+   METRIC LABEL
+========================================================== */
+
+.av-metric-label {
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.52);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+/* ==========================================================
+   METRIC VALUE
+========================================================== */
+
+.av-metric-value {
+    margin: 5px 0 0;
+
+    color: #ffffff;
+
+    font-size: 28px;
+    font-weight: 800;
+
+    line-height: 1.05;
+
+    letter-spacing: -0.8px;
+
+    text-shadow:
+        0 2px 14px rgba(255, 255, 255, 0.12);
+}
+
+/* ==========================================================
+   METRIC SUBTEXT
+========================================================== */
+
+.av-metric-sub {
+    margin: 5px 0 0;
+
+    color: rgba(255, 255, 255, 0.42);
+
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* ==========================================================
+   TOP MATCHES
+========================================================== */
+
+.section-header {
+    color: white;
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 12px;
+}
+
+/* ==========================================================
+   CAR CARD
+========================================================== */
+
+.car-card {
+    position: relative;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    margin: 0 0 14px 0;
+    padding: 20px 22px;
+
+    background: rgba(12, 12, 12, 0.88);
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 18px;
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.28);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.car-card:hover {
+    transform: translateY(-2px);
+
+    border-color: rgba(34, 197, 94, 0.45);
+
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.38),
+        0 0 25px rgba(34, 197, 94, 0.08);
+}
+
+/* ==========================================================
+   TOP SECTION
+========================================================== */
+
+.car-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+.car-card-main {
+    min-width: 0;
+    flex: 1;
+}
+
+/* ==========================================================
+   BEST VALUE
+========================================================== */
+
+.car-best-tag {
+    display: inline-flex;
+    align-items: center;
+
+    width: fit-content;
+
+    margin-bottom: 8px;
+    padding: 4px 10px;
+
+    border-radius: 999px;
+
+    background: rgba(34, 197, 94, 0.16);
+
+    border: 1px solid rgba(34, 197, 94, 0.65);
+
+    color: #ffffff;
+
+    font-size: 10px;
+    font-weight: 900;
+
+    letter-spacing: 0.8px;
+
+    box-shadow:
+        0 0 12px rgba(34, 197, 94, 0.12);
+}
+
+/* ==========================================================
+   RANK
+========================================================== */
+
+.car-rank {
+    margin-bottom: 5px;
+
+    color: #22c55e;
+
+    font-size: 11px;
+    font-weight: 900;
+
+    letter-spacing: 1.2px;
+}
+
+/* ==========================================================
+   CAR TITLE
+========================================================== */
+
+.car-title {
+    color: #ffffff;
+
+    font-size: 20px;
+    font-weight: 850;
+
+    line-height: 1.25;
+
+    letter-spacing: -0.3px;
+}
+
+
+.car-variant {
+    margin-top: 5px;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    line-height: 1.4;
+}
+
+/* ========================================================== PREMIUM PRICE KPI ========================================================== */ 
+.car-price-section { 
+    flex: 0 0 auto; 
+    text-align: center;
+    min-width: 152px; 
+    padding: 13px 16px 14px; 
+    text-align: right; 
+    border-radius: 16px; 
+    background: linear-gradient( 135deg, rgba(34, 197, 94, 0.16), rgba(34, 197, 94, 0.04) ); 
+    border: 1px solid rgba(34, 197, 94, 0.28); 
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 8px 24px rgba(0,0,0,0.18); }
+
+.car-price-section::before { 
+    content: "BEST PRICE"; 
+    display: block; 
+    margin-bottom: 5px; 
+    text-align: center;
+    color: #22c55e; 
+    font-size: 9px; 
+    font-weight: 900; 
+    letter-spacing: 1.5px; 
+    text-transform: uppercase; 
+}
+
+/* MAIN PRICE */ 
+
+.car-price { color: #ffffff; font-size: 28px; font-weight: 950; line-height: 1; letter-spacing: -0.8px; white-space: nowrap; text-shadow: 0 0 18px rgba(255,255,255,0.16), 0 0 32px rgba(34,197,94,0.10); }
+/* ==========================================================
+   INSIGHT BADGE
+========================================================== */
+
+.insight-badge {
+    display: inline-flex;
+
+    margin-top: 8px;
+    padding: 4px 9px;
+
+    border-radius: 999px;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+.insight-positive {
+    color: #ffffff;
+    background: rgba(34, 197, 94, 0.16);
+    border: 1px solid rgba(34, 197, 94, 0.35);
+}
+
+.insight-caution {
+    color: #ffffff;
+    background: rgba(245, 158, 11, 0.16);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+/* ==========================================================
+   SPECS
+========================================================== */
+
+.car-specs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 18px;
+}
+
+
+.car-specs span {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 7px 11px;
+
+    border-radius: 9px;
+
+    background: rgba(255, 255, 255, 0.07);
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.car-specs span:hover {
+    background: rgba(255, 255, 255, 0.11);
+}
+
+/* ==========================================================
+   LOCATION
+========================================================== */
+
+.car-location {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 13px;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 12px;
+    font-weight: 600;
+
+    line-height: 1.4;
+}
+
+/* ==========================================================
+   LISTING LINK
+========================================================== */
+
+.car-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 16px;
+    padding: 9px 15px;
+
+    border-radius: 10px;
+
+    background: #22c55e;
+
+    border: 1px solid #22c55e;
+
+    color: #000000 !important;
+
+    font-size: 12px;
+    font-weight: 900;
+
+    text-decoration: none !important;
+
+    letter-spacing: 0.2px;
+
+    box-shadow:
+        0 5px 18px rgba(34, 197, 94, 0.18);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.car-link:hover {
+    background: #ffffff;
+
+    border-color: #ffffff;
+
+    color: #000000 !important;
+
+    text-decoration: none !important;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 22px rgba(255, 255, 255, 0.16);
+}
+
+
+/* ==========================================================
+   MOBILE / SMALL WIDTH
+========================================================== */
+
+@media (max-width: 700px) {
+
+    .car-card-top {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .car-price-section {
+        text-align: left;
+        min-width: 0;
+    }
+
+    .car-price {
+        font-size: 21px;
+    }
+
+}
+
+/* ==========================================================
+   VIEW ALL
+========================================================== */
+
+.view-all-wrap {
+    margin-top: 10px;
+}
+
+.view-all-wrap button {
+    height: 42px !important;
+    background: rgba(255,255,255,0.08) !important;
+    color: white !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+}
+
+
+/* ==========================================================
+   HIDE STREAMLIT CHROME
+========================================================== */
+
+[data-testid="stToolbar"],
+#MainMenu,
+footer {
+    visibility: hidden !important;
+}
+
+/* ==========================================================
+   AUTOSCOUT CONTENT POSITIONING
+========================================================== */
+
+.autoscout-brand {
+    position: relative;
+    z-index: 10;
+
+    margin-top: 45px;
+    margin-left: 20px;
+}
+
+.autoscout-logo {
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.9), 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.45);
+}
+
+.autoscout-tagline {
+    margin-top: 8px;
+    color: rgba(255,255,255,0.65);
+    font-size: 14px;
+}
+
+
+/* ==========================================================
+   SEARCH POSITION
+========================================================== */
+
+div[data-testid="stCaptionContainer"] {
+    position: relative;
+    z-index: 10;
+
+    margin-top: 95px !important;
+    margin-left: 20px !important;
+
+    color: rgba(255,255,255,0.72) !important;
+}
+
+
+div[data-testid="stTextInput"] {
+    position: relative;
+    z-index: 10;
+}
+
+
+div[data-testid="stButton"] {
+    position: relative;
+    z-index: 10;
+}
+
+/* ==========================================================
+   SEARCH INPUT
+========================================================== */
+
+div[data-testid="stTextInput"] input {
+    height: 58px !important;
+
+    padding: 0 20px !important;
+
+    border-radius: 14px !important;
+
+    background: rgba(10, 10, 10, 0.78) !important;
+
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+
+    color: #ffffff !important;
+
+    font-size: 15px !important;
+
+    backdrop-filter: blur(12px);
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+div[data-testid="stTextInput"] input:focus {
+    border-color: #22c55e !important;
+
+    box-shadow:
+        0 0 0 1px #22c55e,
+        0 10px 30px rgba(0, 0, 0, 0.35) !important;
+}
+
+div[data-testid="stTextInput"] input::placeholder {
+    color: rgba(255, 255, 255, 0.45) !important;
+}
+
+/* ==========================================================
+   FIND CARS BUTTON
+========================================================== */
+
+div[data-testid="stButton"] > button {
+    height: 42px !important;
+
+    width: 115px !important;
+
+    border-radius: 14px !important;
+
+    background: #22c55e !important;
+    border: 1px solid #22c55e !important;
+
+    color: #050505 !important;
+
+    font-size: 15px !important;
+    font-weight: 800 !important;
+
+    letter-spacing: 0.2px !important;
+    line-height: 1 !important;
+
+    text-shadow: none !important;
+
+    box-shadow:
+        0 4px 16px rgba(34, 197, 94, 0.22);
+
+    transition: all 0.2s ease !important;
+}
+
+div[data-testid="stButton"] > button:hover {
+    background: #ffffff !important;
+    border-color: #ffffff !important;
+
+    color: #000000 !important;
+
+    box-shadow:
+        0 6px 22px rgba(255, 255, 255, 0.25);
+
+    transform: translateY(-1px);
+}
+/* ==========================================================
+   RESULTS PANEL
+========================================================== */
+
+.results-panel {
+    position: fixed;
+
+    left: 60px;
+    right: 60px;
+
+    top: 330px;
+    bottom: 24px;
+
+    z-index: 20;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding-right: 12px;
+}
+
+/* ==========================================================
+   BRIGHT WHITE TEXT — GLOBAL
+========================================================== */
+
+.autoscout-logo,
+.autoscout-tagline,
+.results-title,
+.results-count,
+.results-label,
+.results-description,
+.av-metric-label,
+.av-metric-value,
+.av-metric-sub,
+.section-header,
+.car-title,
+.car-variant,
+.car-price,
+.car-specs,
+.car-location,
+.car-link,
+.car-rank {
+    color: #ffffff !important;
+}
+
+/* Streamlit text */
+[data-testid="stCaptionContainer"],
+[data-testid="stCaptionContainer"] p,
+[data-testid="stMarkdownContainer"],
+[data-testid="stMarkdownContainer"] p {
+    color: #ffffff !important;
+}
+
+/* Input text */
+div[data-testid="stTextInput"] input {
+    color: #ffffff !important;
+}
+
+div[data-testid="stTextInput"] input::placeholder {
+    color: rgba(255, 255, 255, 0.72) !important;
+}
+
+/* Make important text extra crisp */
+.results-title,
+.results-count,
+.av-metric-value,
+.car-title,
+.car-price {
+    text-shadow:
+        0 1px 10px rgba(0, 0, 0, 0.65);
+}
+
+/* ==========================================================
+   STRONG STREAMLIT ALERT
+========================================================== */
+
+div[data-testid="stAlertContainer"] {
+    background: rgba(18, 18, 18, 0.94) !important;
+
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+
+    border-radius: 14px !important;
+
+    padding: 14px 18px !important;
+
+    color: #ffffff !important;
+
+    font-weight: 800 !important;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.35),
+        0 0 18px rgba(255, 255, 255, 0.05) !important;
+
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+}
+
+/* Alert text */
+
+div[data-testid="stAlertContainer"] p {
+    color: #ffffff !important;
+
+    font-size: 14px !important;
+
+    font-weight: 800 !important;
+
+    line-height: 1.45 !important;
+}
+
+/* Make alert icon brighter */
+
+div[data-testid="stAlertContainer"] svg {
+    filter: brightness(1.5) !important;
+}
